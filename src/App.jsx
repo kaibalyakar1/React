@@ -7,32 +7,35 @@ import Useref from "./USEREF/Useref";
 import Usecallback from "./USECALLBACK/Usecallback";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./Componenets/AppLayout";
+import Movies from "./APIFORFETCH/Movies";
+import { getMoviesData } from "./APIFORFETCH/GetApiData";
+import About from "./APIFORFETCH/About";
+import Loader from "./APIFORFETCH/Loader";
 
 const App = () => {
+  const fakeLoader = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate 2s loading
+    return null;
+  };
   const router = createBrowserRouter([
     {
       path: "/",
       element: <AppLayout />,
       children: [
+        { path: "/usecallback", element: <Usecallback /> },
+        { path: "/useref", element: <Useref /> },
+        { path: "/usememo", element: <Memo /> },
+        { path: "/usereducer", element: <Usereducer /> },
+        { path: "/", element: <Home /> },
         {
-          path: "/usecallback",
-          element: <Usecallback />,
+          path: "/movies",
+          element: <Movies />,
+          loader: getMoviesData,
         },
         {
-          path: "/useref",
-          element: <Useref />,
-        },
-        {
-          path: "/usememo",
-          element: <Memo />,
-        },
-        {
-          path: "/usereducer",
-          element: <Usereducer />,
-        },
-        {
-          path: "/",
-          element: <Home />,
+          path: "/aboutt",
+          element: <About />,
+          loader: fakeLoader,
         },
       ],
     },
@@ -40,7 +43,9 @@ const App = () => {
 
   return (
     <BioProvider>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+        <Loader /> {/* 👈 Move Loader inside RouterProvider */}
+      </RouterProvider>
     </BioProvider>
   );
 };
