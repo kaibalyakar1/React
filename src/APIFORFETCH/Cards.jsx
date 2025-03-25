@@ -43,7 +43,7 @@ const Cards = ({ movie }) => {
 
           <div className="mt-auto flex justify-end">
             <Link
-              to={`/movie/${imdbID}`}
+              to={`/movies/${imdbID}`}
               className="bg-blue-600 text-white py-2 px-6 rounded font-medium hover:bg-blue-700 transition-colors duration-200"
             >
               View Details

@@ -11,6 +11,8 @@ import Movies from "./APIFORFETCH/Movies";
 import { getMoviesData } from "./APIFORFETCH/GetApiData";
 import About from "./APIFORFETCH/About";
 import Loader from "./APIFORFETCH/Loader";
+import MovieDetails from "./APIFORFETCH/MovieDetails";
+import { fetchMoviewDetails } from "./APIFORFETCH/fetchMoviewDetails";
 
 const App = () => {
   const fakeLoader = async () => {
@@ -31,6 +33,11 @@ const App = () => {
           path: "/movies",
           element: <Movies />,
           loader: getMoviesData,
+        },
+        {
+          path: "/movies/:id",
+          element: <MovieDetails />,
+          loader: fetchMoviewDetails,
         },
         {
           path: "/aboutt",
