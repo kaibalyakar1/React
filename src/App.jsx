@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Home from "./Home";
 import { BioProvider } from "./contextApi";
 import Index, { Usereducer } from "./USEREDUCER";
@@ -13,6 +13,8 @@ import About from "./APIFORFETCH/About";
 import Loader from "./APIFORFETCH/Loader";
 import MovieDetails from "./APIFORFETCH/MovieDetails";
 import { fetchMoviewDetails } from "./APIFORFETCH/fetchMoviewDetails";
+import { getPosts } from "./AXIOS/PostApi";
+import Axs, { LoadingGrid } from "./AXIOS/Axs";
 
 const App = () => {
   const fakeLoader = async () => {
@@ -43,6 +45,16 @@ const App = () => {
           path: "/aboutt",
           element: <About />,
           loader: fakeLoader,
+        },
+
+        {
+          path: "/axs",
+          element: (
+            <Suspense fallback={<LoadingGrid />}>
+              <Axs />
+            </Suspense>
+          ),
+          loader: getPosts,
         },
       ],
     },
