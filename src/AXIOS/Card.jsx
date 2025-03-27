@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ArrowRight, ExternalLink, Edit, Trash2 } from "lucide-react";
 
-const Card = ({ item, onReadMore, onDelete }) => {
+const Card = ({ item, onReadMore, onDelete, handleUpdate }) => {
   const { id, title, body } = item;
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -75,7 +75,7 @@ const Card = ({ item, onReadMore, onDelete }) => {
 
         <div className="flex justify-end space-x-2 mt-4">
           <button className="text-gray-500 hover:text-blue-600 transition-colors p-2 rounded-full hover:bg-blue-50">
-            <Edit className="w-5 h-5" />
+            <Edit onClick={() => handleUpdate(item)} className="w-5 h-5" />
           </button>
           <button className="text-gray-500 hover:text-red-600 transition-colors p-2 rounded-full hover:bg-red-50">
             <Trash2 onClick={() => onDelete(item.id)} className="w-5 h-5" />

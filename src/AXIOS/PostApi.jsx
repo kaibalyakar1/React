@@ -21,3 +21,13 @@ export const deleteApi = async (id) => {
     return { data: [] }; // Return empty data to prevent crashes
   }
 };
+
+export const postApi = async (data) => {
+  try {
+    const response = await api.post("/posts", data);
+    return response; // Ensure it returns data
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return { data: [] }; // Return empty data to prevent crashes
+  }
+};

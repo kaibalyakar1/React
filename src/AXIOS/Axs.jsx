@@ -3,10 +3,12 @@ import { useLoaderData } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import Card from "./Card";
 import { deleteApi } from "./PostApi";
+import Form from "./Form.jsx";
 
 const Axs = memo(() => {
   const res = useLoaderData();
   const [data, setData] = useState(res?.data || []);
+  const [updateForm, setUpdateForm] = useState({});
   console.log("length", res?.data?.length);
   console.log("Rendering Axs component...");
 
@@ -16,28 +18,44 @@ const Axs = memo(() => {
     // Optionally update state or re-fetch data here
   };
 
+  const handleUpdate = async (item) => {
+    setUpdateForm(item);
+  };
   // Render when no data is available
   if (data.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[500px] p-6 bg-gray-50">
-        <AlertCircle className="w-16 h-16 text-yellow-500 mb-4" />
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">
-          No Data Available
-        </h2>
-        <p className="text-gray-500 text-center">
-          There are currently no items to display. Check back later or refresh
-          the page.
-        </p>
-      </div>
+      <>
+        <div className="flex flex-col items-center justify-center min-h-[500px] p-6 bg-gray-50">
+          <AlertCircle className="w-16 h-16 text-yellow-500 mb-4" />
+          <h2 className="text-xl font-semibold text-gray-700 mb-2">
+            No Data Available
+          </h2>
+          <p className="text-gray-500 text-center">
+            There are currently no items to display. Check back later or refresh
+            the page.
+          </p>
+        </div>
+      </>
     );
   }
 
   return (
     <Suspense fallback={<LoadingGrid />}>
+      <Form
+        data={data}
+        setData={setData}
+        updateForm={updateForm}
+        setUpdateForm={setUpdateForm}
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.map((item) => (
-            <Card key={item.id} item={item} onDelete={handleDelete} />
+            <Card
+              key={item.id}
+              item={item}
+              onDelete={handleDelete}
+              handleUpdate={handleUpdate}
+            />
           ))}
         </div>
       </div>
