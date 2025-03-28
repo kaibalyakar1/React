@@ -15,6 +15,7 @@ import MovieDetails from "./APIFORFETCH/MovieDetails";
 import { fetchMoviewDetails } from "./APIFORFETCH/fetchMoviewDetails";
 import { getPosts } from "./AXIOS/PostApi";
 import Axs, { LoadingGrid } from "./AXIOS/Axs";
+import Accordion from "./ACCORDION/Accordion";
 
 const App = () => {
   const fakeLoader = async () => {
@@ -31,6 +32,7 @@ const App = () => {
         { path: "/usememo", element: <Memo /> },
         { path: "/usereducer", element: <Usereducer /> },
         { path: "/", element: <Home /> },
+        { path: "/accordion", element: <Accordion /> },
         {
           path: "/movies",
           element: <Movies />,
