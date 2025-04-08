@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import Home from "./Home";
 import { BioProvider } from "./contextApi";
-import Index, { Usereducer } from "./USEREDUCER";
 import Memo from "./USEMEMO";
 import Useref from "./USEREF/Useref";
 import Usecallback from "./USECALLBACK/Usecallback";
@@ -17,6 +16,7 @@ import { getPosts } from "./AXIOS/PostApi";
 import Axs, { LoadingGrid } from "./AXIOS/Axs";
 import Accordion from "./ACCORDION/Accordion";
 import FormsValidation from "./FORM VALIDATION/FormsValidation";
+import UseReducer from "./USEREDUCER/index.jsx";
 
 const App = () => {
   const fakeLoader = async () => {
@@ -31,7 +31,7 @@ const App = () => {
         { path: "/usecallback", element: <Usecallback /> },
         { path: "/useref", element: <Useref /> },
         { path: "/usememo", element: <Memo /> },
-        { path: "/usereducer", element: <Usereducer /> },
+        { path: "/usereducer", element: <UseReducer /> },
         { path: "/", element: <Home /> },
         { path: "/accordion", element: <Accordion /> },
         {
