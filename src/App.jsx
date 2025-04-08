@@ -16,6 +16,7 @@ import { fetchMoviewDetails } from "./APIFORFETCH/fetchMoviewDetails";
 import { getPosts } from "./AXIOS/PostApi";
 import Axs, { LoadingGrid } from "./AXIOS/Axs";
 import Accordion from "./ACCORDION/Accordion";
+import FormsValidation from "./FORM VALIDATION/FormsValidation";
 
 const App = () => {
   const fakeLoader = async () => {
@@ -47,6 +48,10 @@ const App = () => {
           path: "/aboutt",
           element: <About />,
           loader: fakeLoader,
+        },
+        {
+          path: "/formvalidation",
+          element: <FormsValidation />,
         },
 
         {
