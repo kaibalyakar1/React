@@ -1,33 +1,39 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { useState } from "react";
 
 const Useref = () => {
-  const id = useRef(null);
-  const email = useRef(null);
-  const password = useRef(null);
+  const [count, setCount] = useState(0);
+  //1st usecase of useref
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(id.current.value);
-    console.log(email.current.value);
-    console.log(password.current.value);
-  };
+  const a = useRef(0); // this will not cause re-rendering of the component and the value will be preserved across renders
+
+  //2nd usecase of usref
+
+  const btnref = useRef();
+  console.log(btnref.current); // null
+
+  useEffect(() => {
+    a.current = a.current + 1; // this will not cause re-rendering of the component and the value will be preserved across renders
+    console.log(a.current); // 1
+  });
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" id="name" placeholder="Enter your name" ref={id} />
-      <input
-        type="email"
-        id="email"
-        placeholder="Enter your email"
-        ref={email}
-      />
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter your password"
-        ref={password}
-      />
-      <button>Submit</button>
-    </form>
+    <div>
+      <h1>useRef</h1>
+      <h2>{count}</h2>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+          btnref.current.style.color = "red";
+        }}
+        ref={btnref}
+      >
+        Increment
+      </button>
+
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
   );
 };
 
